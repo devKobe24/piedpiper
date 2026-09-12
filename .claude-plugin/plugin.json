@@ -1,0 +1,13 @@
+{
+  "name": "piedpiper",
+  "version": "0.1.0",
+  "description": "명세에서 Phase 단위 구현까지 끌고 가는 워크플로. 실행 대신 다음에 칠 명령어를 완성해 제시한다.",
+  "author": {
+    "name": "devKobe24",
+    "url": "https://github.com/devKobe24"
+  },
+  "homepage": "https://github.com/devKobe24/piedpiper",
+  "repository": "https://github.com/devKobe24/piedpiper",
+  "license": "MIT",
+  "keywords": ["workflow", "planning", "phase", "spec-driven", "next-command"]
+}
