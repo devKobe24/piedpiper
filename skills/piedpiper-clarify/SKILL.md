@@ -60,7 +60,8 @@ allowed-tools: Read, Glob, Write
 
 ### 질문지 저장
 
-질문 리스트를 출력하는 **동시에** `.progress-report/clarify-01.md`에 저장한다.
+`.progress-report/` 디렉터리가 없으면 먼저 만든다.
+그다음 질문 리스트를 출력하는 **동시에** `.progress-report/clarify-01.md`에 저장한다.
 이미 있으면 번호를 올린다 (clarify-02.md).
 
 대화가 끊기거나 세션이 바뀌어도 `Q1: A` 같은 짧은 답변을 해독할 수 있어야 한다.
