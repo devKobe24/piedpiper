@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 에디터
+.idea/
+*.swp
+*~
+
+# piedpiper가 생성하는 산출물 (테스트 중 실수 커밋 방지)
+.progress-report/
+
+# 배포용 아카이브
+*.zip
+*.plugin
