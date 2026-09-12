@@ -39,29 +39,56 @@ $ARGUMENTS
 
 ### next
 
-상태를 판단해, 사용자가 **직접 입력할 명령어 한 줄**을 제시한다.
+#### 전제: 기록과 실제 상태 대조
+
+분기 판단에 들어가기 전에 먼저 확인한다.
+
+`state.md`가 완료로 기록한 Phase의 완료 조건이 실제로 충족되는지,
+해당 소스 파일과 테스트 파일의 존재로 대조한다.
+`state.md`는 사람이 손으로도 고치는 파일이므로 기록을 그대로 믿지 않는다.
+
+기록과 실제가 어긋나면 그 사실을 먼저 알리고,
+**기록이 아니라 실제 상태를 기준으로** 다음 명령어를 제시한다.
+규칙상 걸리는 분기와 실제로 해야 할 일이 다르면 둘 다 밝힌다.
+
+#### 분기
+
 아래 순서로 먼저 걸리는 조건을 따른다.
 
-1. `CLAUDE.md`가 없다 → `/piedpiper init` 안내
+1. `CLAUDE.md`가 없다 →
+   - 기존 명세 파일이 있는지 먼저 묻고, 있으면 그 경로를 받아 `CLAUDE.md` 초안을 만든다.
+   - 없으면 만들려는 것을 설명해 달라고 요청해 `CLAUDE.md` 초안을 만든다.
+   - 초안이 생긴 **뒤에야** `/piedpiper-clarify`를 안내한다.
+     `/piedpiper-clarify`는 `CLAUDE.md`를 전제로 하므로, 없는 상태에서
+     그쪽으로 보내면 다시 막힌다.
 2. `.progress-report/state.md`가 없다 → `/piedpiper-clarify`
-3. `.progress-report/research-*.md`가 하나도 없다 →
-   `/deep-research <질문>` 형태로, 질문 초안까지 완성해서 제시
+3. `.progress-report/research-*.md`가 없거나, 있어도 제목 줄만 있고
+   실질 내용이 없다 → `/deep-research <질문>` 형태로 질문 초안까지
+   완성해서 제시한다. 파일이 껍데기뿐인 경우에는 그 사실을 함께 알린다.
 4. `CLAUDE.md`에 Phase 구조가 없다 → `/piedpiper-plan`
-5. 진행 중인 Phase가 있다 → 그 Phase의 완료 조건을 그대로 넣은
-   `/goal <조건>` 명령을 완성해서 제시
-6. Phase가 방금 끝났고 리뷰 전이다 → `/ponytail-review`
-7. 기능의 마지막 Phase가 끝났다 → `/piedpiper-wrap`
+5. 진행 중인 Phase가 있다 → 그 Phase의 완료 조건을 **한 글자도 바꾸지 않고**
+   그대로 넣은 `/goal <조건>` 명령을 완성해서 제시한다.
+   이번 Phase의 범위 밖인 것(다음 Phase 몫)이 있으면 함께 짚는다.
+6. Phase가 끝났는데 `state.md`에 리뷰 기록이 없다 → `/ponytail-review`.
+   리뷰 후 이어질 다음 명령(`/goal` 또는 `/piedpiper-wrap`)도 함께 미리 보여준다.
+   **마지막 Phase여도 리뷰가 먼저다.** 7번으로 건너뛰지 않는다.
+7. 기능의 마지막 Phase가 끝났고 리뷰도 마쳤다 → `/piedpiper-wrap`
 8. 모든 기능이 끝났다 → 최종 점검 절차 안내
 
-**중요:** `/goal`, `/deep-research`, `/ponytail` 계열은 직접 실행하지 않는다.
+#### 출력 규칙
+
+`/goal`, `/deep-research`, `/ponytail` 계열은 직접 실행하지 않는다.
 복사해서 붙여넣을 수 있는 완성된 문자열로 출력만 한다.
+
 이유는 두 가지다. 빌트인 명령어는 스킬 안에서 호출할 수 없고,
 `/goal` 조건은 사용자가 눈으로 확인하고 승인해야 하는 지점이다.
+
+어느 분기에서 걸렸는지 판단 근거를 함께 보여준다.
 
 ### init
 
 `.progress-report/` 디렉터리와 `state.md`를 만든다.
-`CLAUDE.md`가 없으면 명세 파일 위치를 먼저 물어본다.
+`CLAUDE.md`가 없으면 분기 1의 절차를 먼저 따른다.
 
 `state.md` 초기 형태:
 
