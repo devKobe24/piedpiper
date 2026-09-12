@@ -61,19 +61,23 @@ $ARGUMENTS
    - 초안이 생긴 **뒤에야** `/piedpiper-clarify`를 안내한다.
      `/piedpiper-clarify`는 `CLAUDE.md`를 전제로 하므로, 없는 상태에서
      그쪽으로 보내면 다시 막힌다.
-2. `.progress-report/state.md`가 없다 → `/piedpiper-clarify`
-3. `.progress-report/research-*.md`가 없거나, 있어도 제목 줄만 있고
+2. `CLAUDE.md`에 "확정된 결정" 섹션이 없다 → `/piedpiper-clarify`.
+   이때 `.progress-report/clarify-*.md`가 이미 있으면,
+   질문은 이미 만들어져 있으니 **답변만 하면 된다**는 점을 함께 알리고
+   미결 항목을 나열한다.
+3. `.progress-report/state.md`가 없다 → `/piedpiper init`
+4. `.progress-report/research-*.md`가 없거나, 있어도 제목 줄만 있고
    실질 내용이 없다 → `/deep-research <질문>` 형태로 질문 초안까지
    완성해서 제시한다. 파일이 껍데기뿐인 경우에는 그 사실을 함께 알린다.
-4. `CLAUDE.md`에 Phase 구조가 없다 → `/piedpiper-plan`
-5. 진행 중인 Phase가 있다 → 그 Phase의 완료 조건을 **한 글자도 바꾸지 않고**
+5. `CLAUDE.md`에 Phase 구조가 없다 → `/piedpiper-plan`
+6. 진행 중인 Phase가 있다 → 그 Phase의 완료 조건을 **한 글자도 바꾸지 않고**
    그대로 넣은 `/goal <조건>` 명령을 완성해서 제시한다.
    이번 Phase의 범위 밖인 것(다음 Phase 몫)이 있으면 함께 짚는다.
-6. Phase가 끝났는데 `state.md`에 리뷰 기록이 없다 → `/ponytail-review`.
+7. Phase가 끝났는데 `state.md`에 리뷰 기록이 없다 → `/ponytail-review`.
    리뷰 후 이어질 다음 명령(`/goal` 또는 `/piedpiper-wrap`)도 함께 미리 보여준다.
-   **마지막 Phase여도 리뷰가 먼저다.** 7번으로 건너뛰지 않는다.
-7. 기능의 마지막 Phase가 끝났고 리뷰도 마쳤다 → `/piedpiper-wrap`
-8. 모든 기능이 끝났다 → 최종 점검 절차 안내
+   **마지막 Phase여도 리뷰가 먼저다.** 8번으로 건너뛰지 않는다.
+8. 기능의 마지막 Phase가 끝났고 리뷰도 마쳤다 → `/piedpiper-wrap`
+9. 모든 기능이 끝났다 → 최종 점검 절차 안내
 
 #### 출력 규칙
 
