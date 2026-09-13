@@ -1,4 +1,11 @@
-# piedpiper
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/devKobe24/images2/blob/main/piedpiper-pixel.png?raw=true">
+    <img src="https://github.com/devKobe24/images2/blob/main/piedpiper-pixel.png?raw=true" width="220" alt="piedpier">
+  </picture>
+</p>
+
+<h1 align="center">piedpier</h1>
 
 **명세부터 구현·리뷰·완료 보고까지, 다음에 할 일을 안내하는 Claude Code 워크플로.**
 
